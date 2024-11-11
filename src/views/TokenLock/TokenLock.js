@@ -678,6 +678,7 @@ export default function TokenLock() {
   };
 
   return (
+    <>
     <GridContainer justifyContent="center">
       <GridItem xs={12} sm={12} md={8}>
         <Card>
@@ -801,5 +802,130 @@ export default function TokenLock() {
       {/* )} */}
       <PanicWithdrawDlg open={opendis} onClose={handledlgClose} />
     </GridContainer>
+
+    <GridContainer justifyContent="center">
+      <GridItem xs={12} sm={12} md={8}>
+        <Card>
+          <CardHeader color="primary">
+            <h4 className={classes.cardTitleWhite}>Liqudity Locker</h4>
+            <p className={classes.cardCategoryWhite}>
+            Use the locker to prove to investors you have locked liquidity. If you are not a token developer, this section is almost definitely not for you.{" "}</p>
+          </CardHeader>
+          <CardBody>
+            {/* <GridContainer> */}
+            <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
+              <ForwardToInboxIcon sx={{ color: 'action.active', mr: 1, my: 0.5 }} />
+              <TextField fullWidth id="input-with-sx" value = {tokenstaddr} onChange={(e) => addrChange(e.target.value)} label="Input token address" variant="standard" />
+            </Box>
+            { progressflag && <GridContainer justifyContent="center">
+              <Box sx={{ display: 'flex' }}>
+                <CircularProgress />
+              </Box>
+            </GridContainer>}
+
+            {erroflag && (
+            <Danger>
+              <ErrorIcon />
+              {errlabel}
+            </Danger>
+            )}
+
+            {transactiveflag && (
+            <div>
+              <GridContainer justifyContent="center">
+                  <GridItem xs={10} sm={10} md={4}>
+                      <p>Token Balance:</p><Danger><h3>{tokenbalance}</h3></Danger>
+                  </GridItem>
+                  <GridItem xs={12} sm={12} md={4}>
+                    <p>Possible Amount:</p><Danger><h3>{lockallowance}</h3></Danger>
+                  </GridItem>
+                  <GridItem xs={12} sm={12} md={4}>
+                    <p>Locked Amount:</p><Danger><h3>{tokenlockedamount}</h3></Danger>
+                  </GridItem>
+              </GridContainer>
+              <GridContainer justifyContent="center">
+                <GridItem xs={12} sm={12} md={4}>
+                  <CustomInput
+                    labelText="Amount"
+                    id="idamount"
+                    formControlProps={{
+                      fullWidth: true,
+                    }}
+                  />
+                </GridItem>
+                <GridItem xs={12} sm={12} md={4}>
+                <Label>
+                    Input time
+                    <TextField
+                      id="idlocktime"
+                      // label="Unlock time"
+                      type="datetime-local"
+                      defaultValue={new Date(new Date().getTime() - (new Date().getTimezoneOffset() * 60000)).toISOString().slice(0, 16)}
+                      disabled={lock_flag}
+                      sx={{ width: 215 }}
+                      InputLabelProps={{
+                        shrink: true,
+                      }}
+                    />
+                  </Label>
+                </GridItem>
+                <GridItem xs={12} sm={12} md={4}>
+                {/* <CustomInput
+                    labelText="Penalty Fee : 50"
+                    id = "idpenaltyfee"
+                    formControlProps={{
+                      fullWidth: true,
+                      disabled:true
+                    }}
+                  /> */}
+                </GridItem>
+              </GridContainer>
+            </div>
+            )}
+            </CardBody>
+            {transactiveflag && (
+            <CardFooter>
+                <Button disabled={approve_flag} onClick={(e) => approveToken()} color="primary">Approve</Button>
+                <Button disabled={lock_flag} onClick={(e) => locktoken()} color="primary">Lock</Button>
+                <Button disabled={unlock_flag} onClick={(e) => withdraw()} color="primary">unLock</Button>
+            </CardFooter>
+            )}
+        </Card>
+      </GridItem>
+      {/* {transactiveflag && ( */}
+      <GridItem xs={12} sm={6} md={3}>
+          <Card>
+            <CardHeader color="primary" stats icon>
+              <CardIcon color="success">
+                {/* <Icon>content_copy</Icon> */}
+                <AddAlarmIcon />
+              </CardIcon>
+            </CardHeader>
+            <CardBody>
+              <Info><small>Token:</small></Info><Danger>{name}({symbol})</Danger>
+              <br />
+              <Info><small>Fee:</small></Info><Danger>{price} coin</Danger>
+              <br />
+              <Info><small>PFee:</small></Info><Danger>{penalfee}</Danger>
+              <br />
+              <Info><small>Unlock time:</small></Info><Danger>{unlocktime}</Danger>
+                
+            </CardBody>
+            {/* <CardFooter stats>
+              <div className={classes.stats}>
+                <Danger>
+                  <Warning />
+                </Danger>
+                <a href="#pablo" onClick={(e) => e.preventDefault()}>
+                  Get more space
+                </a>
+              </div>
+            </CardFooter> */}
+          </Card>
+        </GridItem>
+      {/* )} */}
+      <PanicWithdrawDlg open={opendis} onClose={handledlgClose} />
+    </GridContainer>
+    </>
   );
 }

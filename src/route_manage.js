@@ -15,7 +15,7 @@ import Icons from "./views/Icons/Icons.js";
 import NotificationsPage from "./views/Notifications/Notifications.js";
 import UpgradeToPro from "./views/UpgradeToPro/UpgradeToPro.js";
 
-import TokenLock from "./views/TokenLock/TokenLockManage.js";
+import TokenLiqudityLock from "./views/TokenLock/TokenLockManage.js";
 import Presale from "./views/Presale/Presale.js";
 import LiquidityLock from "./views/LiquidityLock/LiquidityLockManage.js";
 import PresaleManage from "./views/Presale/PresaleManage.js";
@@ -27,21 +27,14 @@ import RTLPage from "./views/RTLPage/RTLPage.js";
 
 const dashboardRoutes = [
   {
-    path: "/tokenlock",
-    name: "Token Lock",
+    path: "/tokenliquiditylock",
+    name: "Token & Liquidity Lock",
     rtlName: "التطور للاحترافية",
     icon: LockIcon,
-    component: TokenLock,
+    component: TokenLiqudityLock,
     layout: "/manage",
   },
-  {
-    path: "/liquiditylock",
-    name: "Liquidity Lock",
-    rtlName: "التطور للاحترافية",
-    icon: LockIcon,
-    component: LiquidityLock,
-    layout: "/manage",
-  },
+
 //   {
 //     path: "/farm",
 //     name: "Farm",

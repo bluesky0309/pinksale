@@ -1,0 +1,1 @@
+(self.webpackChunkvibe_react=self.webpackChunkvibe_react||[]).push([[895],{9895:()=>{}}]);
